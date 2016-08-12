@@ -2,7 +2,7 @@ package com.dao;
 
 import javax.transaction.Transactional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.model.Ad;
 
@@ -16,7 +16,7 @@ import com.model.Ad;
  * @author Gong
  */
 @Transactional
-public interface AdDao extends CrudRepository<Ad, Long> {
+public interface AdDao extends JpaRepository<Ad, Long> {
 
   /**
    * Return the user having the passed email or null if no user is found.

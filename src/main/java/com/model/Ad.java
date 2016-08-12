@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -33,7 +35,8 @@ public class Ad {
 	@NotNull
 	private float bid;
 
-  
+	@NotNull
+	private Campaign campaign;
   
 	public Ad() {
 		super();
@@ -81,6 +84,16 @@ public class Ad {
 	
 	public void setBid(float bid) {
 		this.bid = bid;
+	}
+
+	@ManyToOne
+    @JoinColumn(name = "id")
+	public Campaign getCampaign() {
+		return campaign;
+	}
+
+	public void setCampaign(Campaign campaign) {
+		this.campaign = campaign;
 	}
 	  
 	  
