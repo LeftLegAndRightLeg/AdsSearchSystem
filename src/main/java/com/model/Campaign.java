@@ -29,7 +29,7 @@ public class Campaign {
 	private String name;
 	  // The user's email
 	@NotNull
-	private String budget;
+	private float budget;
 	
 	//@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
@@ -38,7 +38,7 @@ public class Campaign {
 	public Campaign() {
 		super();
 	}
-	public Campaign(String name, String budget) {
+	public Campaign(String name, float budget) {
 		super();
 		this.name = name;
 		this.budget = budget;
@@ -64,17 +64,29 @@ public class Campaign {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBudget() {
+	public float getBudget() {
 		return budget;
 	}
-	public void setBudget(String budget) {
+	public void setBudget(float budget) {
 		this.budget = budget;
 	}
-	
 	
 	public Set<Ad> getAds() {
 		return Ads;
 	}
-	  
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Campaign [id=" + id + ", name=" + name + ", budget=" + budget);
+		sb.append(", Ads= ");
+		for(Ad ad : Ads){
+			sb.append(ad.getId() + " ");
+		}
+		sb.append(" ]");
+		return sb.toString();
+		
+	}
+	
+	
 	  // The user's name
 }

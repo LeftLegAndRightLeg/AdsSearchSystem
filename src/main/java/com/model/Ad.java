@@ -49,11 +49,12 @@ public class Ad {
 		this.id = id;
 	}
 	
-	public Ad(String keyWords, float pClick, float bid) {
+	public Ad(String keyWords, float pClick, float bid, Campaign campaign) {
 		super();
 		this.keyWords = keyWords;
 		this.pClick = pClick;
 		this.bid = bid;
+		this.campaign = campaign;
 	}
 	
 	public long getId() {
@@ -95,6 +96,15 @@ public class Ad {
 
 	public void setCampaign(Campaign campaign) {
 		this.campaign = campaign;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Ad [id=" + id + ", keyWords=" + keyWords + ", pClick=" + pClick + ", bid=" + bid + ", campaign="
+				+ campaign.getName() + "]");
+		return sb.toString();
+		
 	}
 	  
 	  
