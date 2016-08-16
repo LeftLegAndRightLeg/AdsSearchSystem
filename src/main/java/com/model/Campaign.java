@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -30,6 +31,8 @@ public class Campaign {
 	@NotNull
 	private String budget;
 	
+	//@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
 	private Set<Ad> Ads;
 	
 	public Campaign() {
@@ -68,7 +71,7 @@ public class Campaign {
 		this.budget = budget;
 	}
 	
-	@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
+	
 	public Set<Ad> getAds() {
 		return Ads;
 	}

@@ -36,6 +36,8 @@ public class Ad {
 	private float bid;
 
 	@NotNull
+	@ManyToOne
+    @JoinColumn(name = "campaign_id")
 	private Campaign campaign;
   
 	public Ad() {
@@ -86,8 +88,7 @@ public class Ad {
 		this.bid = bid;
 	}
 
-	@ManyToOne
-    @JoinColumn(name = "id")
+	
 	public Campaign getCampaign() {
 		return campaign;
 	}
