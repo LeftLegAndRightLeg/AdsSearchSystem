@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.algorithm.InvertedIndex;
 import com.dao.*;
 import com.model.*;
+import com.queryParser.QueryParser;
 
 @SpringBootApplication
 public class WebAppInitializer implements CommandLineRunner{
@@ -25,6 +26,9 @@ public class WebAppInitializer implements CommandLineRunner{
 	
 	@Autowired
 	private InvertedIndex mapReduce;
+	
+	@Autowired
+	private QueryParser queryParser;
 	
     public static void main(String[] args)  throws Exception{
     	
@@ -68,6 +72,7 @@ public class WebAppInitializer implements CommandLineRunner{
         System.out.println("****************************" + " MapReduce " + "****************************");
         mapReduce.map();
         System.out.println(mapReduce.printMap());
+        System.out.println(queryParser.parseQuery("the best nike shoes !"));
         System.out.println("****************************" + " Finishing " + "****************************");
     }
 }
