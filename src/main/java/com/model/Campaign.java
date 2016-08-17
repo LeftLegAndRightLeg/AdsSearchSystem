@@ -31,7 +31,6 @@ public class Campaign {
 	@NotNull
 	private float budget;
 	
-	//@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
 	@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL)
 	private Set<Ad> Ads;
 	
