@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.algorithm.InvertedIndex;
+import com.algorithm.ScoreRank;
 import com.dao.*;
 import com.model.*;
 import com.queryParser.QueryParser;
@@ -29,6 +30,9 @@ public class WebAppInitializer implements CommandLineRunner{
 	
 	@Autowired
 	private QueryParser queryParser;
+	
+	@Autowired
+	private ScoreRank scoreRank;
 	
     public static void main(String[] args)  throws Exception{
     	
@@ -71,8 +75,13 @@ public class WebAppInitializer implements CommandLineRunner{
         }
         System.out.println("****************************" + " MapReduce " + "****************************");
         mapReduce.map();
-        System.out.println(mapReduce.printMap());
-        System.out.println(queryParser.parseQuery("the best nike shoes !"));
+        System.out.println(mapReduce.getMap());
+        System.out.println(queryParser.parseQuery("key2 key3 the of !"));
+        
+        scoreRank.setIndexMap(mapReduce.getMap());
+        scoreRank.setEnteredKeyWords(queryParser.parseQuery("key2 key3 the of !"));
+        
+        System.out.println(scoreRank.getScoreRank());
         System.out.println("****************************" + " Finishing " + "****************************");
     }
 }

@@ -4,7 +4,7 @@ TO DO NEXT:
 
 	Front-End 
 	
-	recommendation algorithm
+	design API
 	
 	apache sercurity // used in user system and need to be added later
 	

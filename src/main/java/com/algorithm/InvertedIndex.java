@@ -23,8 +23,8 @@ public class InvertedIndex {
 		indexMap = new HashMap<String, List<Long>>();
 	}
 	
-	public String printMap(){
-		return indexMap.toString();
+	public Map<String, List<Long>> getMap(){
+		return this.indexMap;
 	}
 	
 	public void map(){
@@ -36,9 +36,6 @@ public class InvertedIndex {
 				indexMap.get(key).add(ad.getId());
 			}
 		}
-	}
-	public List<Long> reduce(){
-		return new ArrayList<Long>();
 	}
 	
 }
