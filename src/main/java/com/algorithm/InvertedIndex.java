@@ -23,7 +23,11 @@ public class InvertedIndex {
 		indexMap = new HashMap<String, List<Long>>();
 	}
 	
-	public void mapReduce(){
+	public String printMap(){
+		return indexMap.toString();
+	}
+	
+	public void map(){
 		for(Ad ad : adDao.findAll()){
 			for(String key : ad.getKeyWords().split(",")){
 				if(!indexMap.containsKey(key)){
@@ -33,7 +37,8 @@ public class InvertedIndex {
 			}
 		}
 	}
-	public String printMap(){
-		return indexMap.toString();
+	public List<Long> reduce(){
+		return new ArrayList<Long>();
 	}
+	
 }

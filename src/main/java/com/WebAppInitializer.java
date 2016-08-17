@@ -24,7 +24,7 @@ public class WebAppInitializer implements CommandLineRunner{
 	private CampaignDao campaignDao;
 	
 	@Autowired
-	InvertedIndex mapReduce;
+	private InvertedIndex mapReduce;
 	
     public static void main(String[] args)  throws Exception{
     	
@@ -66,7 +66,7 @@ public class WebAppInitializer implements CommandLineRunner{
         	System.out.println(campaign.toString());
         }
         System.out.println("****************************" + " MapReduce " + "****************************");
-        mapReduce.mapReduce();
+        mapReduce.map();
         System.out.println(mapReduce.printMap());
         System.out.println("****************************" + " Finishing " + "****************************");
     }
