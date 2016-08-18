@@ -76,12 +76,12 @@ public class WebAppInitializer implements CommandLineRunner{
         System.out.println("****************************" + " MapReduce " + "****************************");
         mapReduce.map();
         System.out.println(mapReduce.getMap());
-        System.out.println(queryParser.parseQuery("key2 key3 the of !"));
-        
-        scoreRank.setIndexMap(mapReduce.getMap());
-        scoreRank.setEnteredKeyWords(queryParser.parseQuery("key2 key3 the of !"));
-        
-        System.out.println(scoreRank.getScoreRank());
+//        System.out.println(queryParser.parseQuery("key2 key3 the of !"));
+//        
+//        scoreRank.setIndexMap(mapReduce.getMap());
+//        scoreRank.setEnteredKeyWords(queryParser.parseQuery("key2 key3 the of !"));
+//        
+//        System.out.println(scoreRank.getScoreRank());
         System.out.println("****************************" + " Finishing " + "****************************");
     }
 }
