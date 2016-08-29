@@ -23,7 +23,7 @@ public interface AdDao extends JpaRepository<Ad, Long> {
    * 
    * @param email the user email.
    */
-  //public Ad findByKeyWords(String keyWords);
+//  public Ad findByKeyWords(String keyWords);
 
 } 
 

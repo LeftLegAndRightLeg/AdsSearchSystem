@@ -18,14 +18,12 @@ import org.springframework.stereotype.Service;
 public class QueryParser {
 
   public List<String> parseQuery(String queryStr) {
-    // tokenize queryStr, remove stop word, stemming
-	List<String> tokens = new ArrayList<String>();
+    List<String> tokens = new ArrayList<String>();
 	AttributeFactory factory = AttributeFactory.DEFAULT_ATTRIBUTE_FACTORY;
 	Tokenizer tokenizer = new StandardTokenizer(factory);
 	tokenizer.setReader(new StringReader(queryStr));
 	CharArraySet stopWords = EnglishAnalyzer.getDefaultStopSet();
     TokenStream tokenStream = new StopFilter(tokenizer, stopWords);
-//    StringBuilder sb = new StringBuilder();
     CharTermAttribute charTermAttribute = tokenizer.addAttribute(CharTermAttribute.class);
     try {
     	tokenStream.reset();
@@ -33,7 +31,6 @@ public class QueryParser {
             String term = charTermAttribute.toString();
             
             tokens.add(term);
-//            sb.append(term + " ");
         }
         tokenStream.end();
         tokenStream.close();

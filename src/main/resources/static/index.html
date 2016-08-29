@@ -1,30 +1,135 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="app" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="app" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="app" class="no-js"> <!--<![endif]-->
+<html>
 <head>
+    <title>Ads Search System</title>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Spring boot and Angularjs Tutorial</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="js/myApp.js"></script>
+
+
 </head>
 <body>
-<h2>Administrator Panel</h2>
-<div class="home-section">
-    <ul class="menu-list">
-        <li><a href="#/users">Users</a></li>
-        <li><a href="#/roles">Roles</a></li>
-    </ul>
-</div>
-<div ng-view></div>
-<script src="/webjars/angularjs/1.4.9/angular.js"></script>
-<script src="/webjars/angularjs/1.4.9/angular-resource.js"></script>
-<script src="/webjars/angularjs/1.4.9/angular-route.js"></script>
-<script src="/js/app.js"></script>
-<script src="/js/controller.js"></script>
-<link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.css">
+<div class="row" ng-app="myApp">
+    <!-- first column -->
+    <div class="text-center col-sm-6">
+
+        <div ng-controller="getAllCampaign">
+            <h2>Show All Campaigns</h2>
+            <input type="submit" class="btn btn-info" value="Get All Campaigns" ng-click="getAllCampaign()">
+        </div>
+
+        <div ng-controller="getAllAd">
+            <h2>Show All Ads</h2>
+            <input type="submit" class="btn btn-info" value="Get All Ads" ng-click="getAllAd()">
+        </div>
+
+        <div ng-controller="searchAd">
+            <h2>Ads Search</h2>
+            <label for="keyWords">Key Words:</label>
+            <input type="text" class="form-control" name="keyWords" ng-model="keyWords" required>
+            <input type="submit" class="btn btn-info" value="Search Ad" ng-click="searchAd()">
+        </div> 
+
+        <div ng-controller="addCampaign">
+            <h2>Create Campaign</h2>
+
+            <label for="name">name:</label>
+            <input type="text" class="form-control" name="name" ng-model="name" required>
+
+            <label for="budget">budget:</label>
+            <input type="number" step = "any" class="form-control" name="budget" ng-model="budget" required>
+
+            <input type="submit" class="btn btn-success" value="Create Campaign" ng-click="addCampaign()">
+
+        </div>
+
+        <div ng-controller="addAd">
+            <h2>Create Ad</h2>
+
+            <label for="keyWords">keyWords:</label>
+            <input type="text" class="form-control" name="keyWords" ng-model="keyWords" required>
+
+            <label for="name">name:</label>
+            <input type="text" class="form-control" name="name" ng-model="name" required>
+
+            <label for="description">description:</label>
+            <input type="text" class="form-control" name="description" ng-model="description" required>
+
+            <label for="pClick">pClick:</label>
+            <input type="number" step = "any" class="form-control" name="pClick" ng-model="pClick" required>
+
+            <label for="bid">bid:</label>
+            <input type="number" step = "any" class="form-control" name="bid" ng-model="bid" required>
+
+            <label for="campaignId">campaignId:</label>
+            <input type="number" class="form-control" name="campaignId" ng-model="campaignId" required>
+
+            <label for="adImage">adImage:</label>
+            <input type="file" class="form-control" name="adImage" file-model="adImage" required>
+
+            <input type="submit" class="btn btn-success" value="Create Ad" ng-click="uploadFile()">
+
+        </div>
+
+    </div> 
+    <!-- Second Column -->
+    <div class="text-center col-sm-6">
+        <h2>=== BackEnd Response ===</h2>
+
+        <div ng-controller="showCampaign">
+            <h3>=== Campaign Info ===</h3>
+            <div>
+                <table class="table table-hover">
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>budget</th>
+                    </tr>
+                    <tr ng-repeat="cur in campaingData track by $index">
+                        <td>{{ cur.id }}</td>
+                        <td>{{ cur.name }}</td>
+                        <td>{{ cur.budget }}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div ng-controller="showAd">  
+            <h3>=== Ad Info ===</h3>
+            <div>
+                <table class="table table-hover">
+                    <tr>
+                        <th>id</th>
+                        <th>keyWords</th>
+                        <th>name</th>
+                        <th>description</th>
+                        <th>adImage</th>
+                        <th>pClick</th>
+                        <th>bid</th>
+                    </tr>
+                    <tr ng-repeat="cur in adData track by $index">
+                        <td>{{ cur.id }}</td>
+                        <td>{{ cur.keyWords }}</td>
+                        <td>{{ cur.name }}</td>
+                        <td>{{ cur.description }}</td>
+                        <td>
+                            <img src={{cur.adImage.url}} class="img-thumbnail">
+                        </td>
+                        <td>{{ cur.pClick }}</td>
+                        <td>{{ cur.bid  }}</td>
+                    </tr>
+                </table>
+            </div> 
+
+        </div>
+    
+    </div>
+ </div>  
+
 </body>
 </html>
