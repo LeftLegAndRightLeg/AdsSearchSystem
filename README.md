@@ -23,7 +23,9 @@ Run command :
 	[url]:8080
 
 
-	
+	screen -ls
+	C -a d
+	screen -r **
 
 Relevance Score = hitCount / keyWordSize
 Quality Score = 0.75 * pClick + 0.25 * Relevance Score

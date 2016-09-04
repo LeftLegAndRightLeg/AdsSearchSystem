@@ -1,32 +1,30 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('showCampaign', function($scope, CampaingData) {
-        $scope.$watch(function () { return CampaingData.getResultData(); }, function (newValue, oldValue) {
+    $scope.$watch(function () { return CampaingData.getResultData(); }, function (newValue, oldValue) {
         if (newValue !== oldValue){
-            $scope.campaingData = newValue;   
+            $scope.campaingData = newValue;
         }
-        console.log(newValue);
     });
 
-    });
+});
 
 myApp.controller('showAd', function($scope, AdData) {
-        $scope.$watch(function () { return AdData.getResultData(); }, function (newValue, oldValue) {
+    $scope.$watch(function () { return AdData.getResultData(); }, function (newValue, oldValue) {
         if (newValue !== oldValue){
-            $scope.adData = newValue;   
+            $scope.adData = newValue;
         }
-        console.log(newValue); 
     });
 
-    });
+});
 
 
 myApp.factory('CampaingData', function(){
     var data =
-        {
-            ResultData: ''
-        };
-    
+    {
+        ResultData: ''
+    };
+
     return {
         getResultData: function () {
             return data.ResultData;
@@ -38,10 +36,10 @@ myApp.factory('CampaingData', function(){
 });
 myApp.factory('AdData', function(){
     var data =
-        {
-            ResultData: ''
-        };
-    
+    {
+        ResultData: ''
+    };
+
     return {
         getResultData: function () {
             return data.ResultData;
@@ -53,72 +51,86 @@ myApp.factory('AdData', function(){
 });
 
 myApp.controller('getAllCampaign', function($scope, $http, CampaingData, AdData) {
-        $scope.getAllCampaign = function(){
-            var url = '/getAllCampaign';
-           
-            $http.get(url).success(function(response) {
-                console.log(JSON.stringify(response));
-                CampaingData.setResultData(response);
-           		AdData.setResultData('');
-            }, function(response) {
-        });
-        };
+    $scope.getAllCampaign = function(){
+        var url = '/getAllCampaign';
 
-    });
+        $http.get(url).success(function(response) {
+            console.log(JSON.stringify(response));
+            CampaingData.setResultData(response);
+            AdData.setResultData('');
+        }, function(response) {
+        });
+    };
+
+});
 
 myApp.controller('getAllAd', function($scope, $http, AdData, CampaingData) {
-        $scope.getAllAd = function(){
-            var url = '/getAllAd';
-            
-            $http.get(url).success(function(response) {
-                console.log(JSON.stringify(response));
-                AdData.setResultData(response);
-           		CampaingData.setResultData('');
-            }, function(response) {
-        });
-        };
+    $scope.getAllAd = function(){
+        var url = '/getAllAd';
 
-    });
+        $http.get(url).success(function(response) {
+            console.log(JSON.stringify(response));
+            AdData.setResultData(response);
+            CampaingData.setResultData('');
+        }, function(response) {
+        });
+    };
+
+});
+
+myApp.controller('deleteAd', function($scope, $http, AdData, CampaingData) {
+    $scope.deleteAd = function(){
+        var url = '/deleteAd/' + $scope.adId;
+        $scope.adId = null;
+        $http.get(url).success(function(response) {
+            console.log(JSON.stringify(response));
+            AdData.setResultData(response);
+            CampaingData.setResultData('');
+        }, function(response) {
+        });
+    };
+
+});
 
 myApp.controller('searchAd', function($scope, $http, AdData, CampaingData) {
-        $scope.searchAd = function(){
-            var url = '/searchAd/' + $scope.keyWords;
-            $scope.keyWords = null;
-            $http.get(url).success(function(response) {
-                console.log(JSON.stringify(response));
-                AdData.setResultData(response);
-           		CampaingData.setResultData('');
-            }, function(response) {
+    $scope.searchAd = function(){
+        var url = '/searchAd/' + $scope.keyWords;
+        $scope.keyWords = null;
+        $http.get(url).success(function(response) {
+            console.log(JSON.stringify(response));
+            AdData.setResultData(response);
+            CampaingData.setResultData('');
+        }, function(response) {
         });
-        };
+    };
 
-    });
+});
 
 myApp.controller('addCampaign', function($scope, $http, CampaingData, AdData) {
-        $scope.addCampaign = function(){
-            var url = '/addCampaign';
-            
-            var fd = new FormData();
-        	fd.append('name', $scope.name);
-        	fd.append('budget', $scope.budget);
+    $scope.addCampaign = function(){
+        var url = '/addCampaign';
 
-        	$scope.name = null;
-            $scope.budget = null;
+        var fd = new FormData();
+        fd.append('name', $scope.name);
+        fd.append('budget', $scope.budget);
 
-            $http.post(url, fd, {
-	            transformRequest: angular.identity,
-	            headers: {'Content-Type': undefined}
-	        })
-	        .success(function(response){
-	        	console.log(JSON.stringify(response));
-	        	CampaingData.setResultData(response);
+        $scope.name = null;
+        $scope.budget = null;
+
+        $http.post(url, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+            .success(function(response){
+                console.log(JSON.stringify(response));
+                CampaingData.setResultData(response);
                 AdData.setResultData('');
-	        })
-	        .error(function(){
-	        });
-	    }
+            })
+            .error(function(){
+            });
+    }
 
-    });
+});
 
 myApp.directive('fileModel', ['$parse', function ($parse) {
     return {
@@ -126,13 +138,13 @@ myApp.directive('fileModel', ['$parse', function ($parse) {
         link: function(scope, element, attrs) {
             var model = $parse(attrs.fileModel);
             var modelSetter = model.assign;
-            
+
             element.bind('change', function(){
                 scope.$apply(function(){
                     modelSetter(scope, element[0].files[0]);
                 });
             });
-            
+
         }
     };
 }]);
@@ -153,20 +165,20 @@ myApp.service('fileUpload', ['$http','AdData','CampaingData', function ($http, A
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         })
-        .success(function(response){
-        	console.log(JSON.stringify(response));
-            AdData.setResultData(response);
-            CampaingData.setResultData('');
-        })
-        .error(function(){
-        });
+            .success(function(response){
+                console.log(JSON.stringify(response));
+                AdData.setResultData(response);
+                CampaingData.setResultData('');
+            })
+            .error(function(){
+            });
     }
 }]);
 
 
 
 myApp.controller('addAd', ['$scope', 'fileUpload', function($scope, fileUpload){
-    
+
     $scope.uploadFile = function(){
         var file = $scope.adImage;
 
@@ -174,11 +186,11 @@ myApp.controller('addAd', ['$scope', 'fileUpload', function($scope, fileUpload){
         var name = $scope.name;
         var description = $scope.description;
         var pClick = $scope.pClick;
-        var bid = $scope.bid;          
+        var bid = $scope.bid;
         var campaignId = $scope.campaignId;
-        
+
         var uploadUrl = "/addAd";
-        
+
         $scope.keyWords = null;
         $scope.name = null;
         $scope.description = null;
@@ -189,5 +201,5 @@ myApp.controller('addAd', ['$scope', 'fileUpload', function($scope, fileUpload){
         fileUpload.uploadFileToUrl(file, uploadUrl, keyWords, name, description, pClick, bid, campaignId);
 
     };
-    
+
 }]);

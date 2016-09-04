@@ -32,7 +32,17 @@
             <label for="keyWords">Key Words:</label>
             <input type="text" class="form-control" name="keyWords" ng-model="keyWords" required>
             <input type="submit" class="btn btn-info" value="Search Ad" ng-click="searchAd()">
-        </div> 
+        </div>
+
+        <div ng-controller="deleteAd">
+            <h2>Delete Ad</h2>
+
+            <label for="adId">adId:</label>
+            <input type="number" class="form-control" name="adId" ng-model="adId" required>
+
+            <input type="submit" class="btn btn-danger" value="Delete Ad" ng-click="deleteAd()">
+
+        </div>
 
         <div ng-controller="addCampaign">
             <h2>Create Campaign</h2>
@@ -75,7 +85,7 @@
 
         </div>
 
-    </div> 
+    </div>
     <!-- Second Column -->
     <div class="text-center col-sm-6">
         <h2>=== BackEnd Response ===</h2>
@@ -99,7 +109,7 @@
 
         </div>
 
-        <div ng-controller="showAd">  
+        <div ng-controller="showAd">
             <h3>=== Ad Info ===</h3>
             <div>
                 <table class="table table-hover">
@@ -124,12 +134,12 @@
                         <td>{{ cur.bid  }}</td>
                     </tr>
                 </table>
-            </div> 
+            </div>
 
         </div>
-    
+
     </div>
- </div>  
+</div>
 
 </body>
 </html>
